@@ -27,7 +27,8 @@ RUN apt-get update && \
     \
     apt-cache policy docker-ce && \
     apt-get update && \
-    apt-get install -y python3-setuptools python3-pip && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata && \
+    apt-get install -y awscli && \
     apt-get update && \
     apt-get install -y docker-ce=18.06.1~ce~3-0~ubuntu systemd && \
     systemctl disable docker && \
@@ -55,9 +56,6 @@ RUN apt-get update && \
     apt-get clean all && \
     \
     usermod -aG docker buildagent
-
-# Install ASW-CLI
-RUN pip3 install awscli
 
 # A better fix for TW-52939 Dockerfile build fails because of aufs
 VOLUME /var/lib/docker
