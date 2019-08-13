@@ -1,4 +1,4 @@
-FROM teamcity-minimal-agent:latest
+FROM jetbrains/teamcity-minimal-agent:latest
 
 LABEL dockerImage.teamcity.version="latest" \
       dockerImage.teamcity.buildNumber="latest"
@@ -20,7 +20,7 @@ ENV DOTNET_CLI_TELEMETRY_OPTOUT=true \
     DOTNET_SDK_VERSION=2.2.103
 
 RUN apt-get update && \
-    apt-get install -y git mercurial apt-transport-https ca-certificates software-properties-common && \
+    apt-get install -y git mercurial apt-transport-https ca-certificates software-properties-common wget bc && \
     \
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
