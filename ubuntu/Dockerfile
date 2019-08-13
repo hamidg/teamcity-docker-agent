@@ -57,10 +57,13 @@ RUN apt-get update && \
     \
     usermod -aG docker buildagent
 
+RUN wget --quiet -P /usr/local/bin https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.3.1/linux-amd64/docker-credential-ecr-login && \
+    chmod +x /usr/local/bin/docker-credential-ecr-login
+
 # A better fix for TW-52939 Dockerfile build fails because of aufs
 VOLUME /var/lib/docker
 
 COPY run-docker.sh /services/run-docker.sh
 
 # Trigger .NET CLI first run experience by running arbitrary cmd to populate local package cache
-RUN dotnet help
+# RUN dotnet help
